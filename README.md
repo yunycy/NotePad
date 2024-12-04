@@ -10,14 +10,19 @@
 ## 项目描述
  
 此项目是基于原有NotePad进行的一次更新。
-· 新增笔记时将会生成新增笔记的时间，并且显示在listview
-· 实现了搜索功能，能通过关键字对笔记进行快速搜索
-· 实现了UI界面的美化，包括listview的背景美化，以及NoteEditor内部背景的美化
-· 添加了笔记的导出功能，能够将笔记导出置主文件夹
+
+·  新增笔记时将会生成新增笔记的时间，并且显示在listview
+
+·  实现了搜索功能，能通过关键字对笔记进行快速搜索
+
+·  实现了UI界面的美化，包括listview的背景美化，以及NoteEditor内部背景的美化
+
+·  添加了笔记的导出功能，能够将笔记导出置主文件夹
+
  
 ## 时间戳实现部分
 
-1.首先添加COLUMN_NAME_MODIFICATION_DATE字段，用于存储时间戳  
+<strong>1.首先添加COLUMN_NAME_MODIFICATION_DATE字段，用于存储时间戳  <strong>
 
 ```java  
     private static final String[] PROJECTION = new String[] {
@@ -28,7 +33,7 @@
     };
 ```
 
-2.然后在视图中添加显示时间戳的代码  
+<strong>2.然后在视图中添加显示时间戳的代码  <strong>
      
 ```java  
   // 要在视图中显示的光标列的名称，初始化为标题列和修改日期列
@@ -47,7 +52,7 @@
     )
 ```
 
-3.将时间戳格式改为年月日
+<strong>3.将时间戳格式改为年月日  <strong>
 
      
 ```java  
@@ -97,14 +102,14 @@
     }
 ```
 
-4.最终呈现的效果如图  
+<strong>4.最终呈现的效果如图  <strong>
 
 ![image](https://github.com/user-attachments/assets/7e5343c6-4b57-4c9c-9f5b-4546dad8dd6f)
 
 
 ## 搜索功能实现部分
 
-1.在onCreateOptionsMenu中添加搜索功能  
+<strong>1.在onCreateOptionsMenu中添加搜索功能  <strong>
 
 ```java  
   @Override
@@ -145,7 +150,7 @@
     }
 ```
 
-2.包括searchNotes方法  
+<strong>2.包括onCreateOptionsMenu中searchNotes方法  <strong>
 
 ```java  
   private void searchNotes(String query) {
@@ -168,7 +173,7 @@
     }
 ```
 
-3.添加菜单项  
+<strong>3.添加菜单项，用于在菜单列表处显示搜索按钮  <strong>
 
 ```java  
     <item
@@ -180,13 +185,13 @@
 
 ```
 
-4.最终呈现的效果如图  
+<strong>4.最终呈现的效果如图  <strong>
 
 ![image](https://github.com/user-attachments/assets/50734b7a-dc4f-4a15-ae04-3f697fe8c719)
 
 ## 美化实现部分
 
-1.覆写getview，该功能能够实现随机生成不同背景颜色的listview，同时我让RGB在一个较为柔和的区间，以免视觉冲击过大  
+<strong>1.覆写getview，该功能能够实现随机生成不同背景颜色的listview，同时我让RGB在一个较为柔和的区间，以免视觉冲击过大  <strong>
 
 ```java  
    // 创建ListView的后台适配器。
@@ -228,7 +233,7 @@
         setListAdapter(adapter);
 ```
 
-2.包括getContrastingColor取对比颜色方法，能够让标题和时间戳随背景随机变化而更加明显  
+<strong>2.包括getContrastingColor取对比颜色方法，能够让标题和时间戳随背景随机变化而更加明显  <strong>
 
 ```java  
    private int getContrastingColor(int backgroundColor) {
@@ -245,13 +250,13 @@
     }
 ```
 
-3.最终呈现的效果如图  
+<strong>3.最终呈现的效果如图  <strong>
 
 ![image](https://github.com/user-attachments/assets/6e9929b6-f3fe-4fac-809b-93d039c20963)
 
 ## 导出笔记功能实现部分
 
-1.添加菜单项  
+<strong>1.添加菜单项  <strong>
 
 ```java  
    <item
@@ -261,7 +266,7 @@
         android:showAsAction="ifRoom" />
 ```
 
-2.在onOptionsItemSelected方法中处理导出菜单项  
+<strong>2.在onOptionsItemSelected方法中处理导出菜单项  <strong>
 
 ```java  
    @Override
@@ -294,7 +299,7 @@
     }
 ```
 
-3.实现exportNotes方法  
+<strong>3.实现exportNotes方法  <strong>
 
 ```java  
   private void exportNotes() {
@@ -346,25 +351,25 @@
     }
 ```
 
-4.修改PROJECTION包括笔记内容  
+<strong>4.修改PROJECTION，使其拥有笔记内容字段  <strong>
 
 ```java  
     private static final String[] PROJECTION = new String[] {
             NotePad.Notes._ID, // 0
             NotePad.Notes.COLUMN_NAME_TITLE, // 1
             NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,
-            NotePad.Notes.COLUMN_NAME_NOTE, // 3 - 假设这里是内容列
+            NotePad.Notes.COLUMN_NAME_NOTE, // 3 
     };
 ```
 
-5.确保权限，在AndroidManifest.xml中添加文件写入权限  
+<strong>5.确保权限，在AndroidManifest.xml中添加文件写入权限  <strong>
 
 ```java  
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 ```
 
-6.最终呈现的效果如图  
+<strong>6.最终呈现的效果如图  <strong>
 
 ![image](https://github.com/user-attachments/assets/a461f038-53c3-4852-9b2d-35345e88d6e9)
 
